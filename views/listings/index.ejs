@@ -14,26 +14,51 @@
     margin-right: 2rem;
     margin-top: 2rem;
     opacity: 0.7;
+    transition: all 0.3s ease;
   }
 
   .filter:hover {
     opacity: 1;
     cursor: pointer;
-    color: blue;
+    color: var(--primary-color);
+    transform: translateY(-3px);
   }
   
   .tax-info {
     display: none;
+    color: var(--accent-color);
+    font-weight: 500;
   }
 
   .tax-switch {
-    border: 1px solid black;
-    border-radius:  1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
     height: 3rem;
     padding: 1rem;
     margin-left: 5rem;
     align-items: center;
     display: flex;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 5px var(--shadow-color);
+  }
+  
+  .listing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .location-text {
+    font-size: 0.9rem;
+    color: var(--text-light) !important;
+    margin-top: 0.5rem;
+  }
+  
+  .location-text i {
+    color: var(--accent-color);
+    margin-right: 0.3rem;
   }
 </style>
 
@@ -117,14 +142,22 @@
         alt="listing_image" 
         style="height: 20rem" />
 
-      <div class="card-img-overlay"> <i><b><u> WanderLust</u></b></i></div>
-
       <div class="card-body">
         <p class="card-text">
-           <b><%= listing.title %></b> <br>
-           &#8377; <%= listing.price  %> /Night
-           <i class="tax-info">&nbsp;+18% GST</i>
+           <b class="listing-title"><%= listing.title %></b> <br>
+           <span class="price-tag">&#8377; <%= listing.price  %> /Night</span>
+           <span class="tax-info">&nbsp;+18% GST</span>
         </p>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="location-text text-muted">
+            <i class="fa-solid fa-location-dot"></i> <%= listing.location %>
+          </p>
+          <% if(listing.avgRating > 0) { %>
+            <p class="card-text">
+              <span class="badge bg-success"><i class="fa-solid fa-star"></i> <%= listing.avgRating %></span>
+            </p>
+          <% } %>
+        </div>
       </div>
 
     </div>

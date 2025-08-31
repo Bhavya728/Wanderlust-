@@ -1,35 +1,39 @@
 
-
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
-const { saveRedirectUrl } = require("../middleware.js");
+const { saveRedirectUrl, isLoggedIn } = require("../middleware.js");
 
 
-const userContorller = require("../controllers/users.js");
+const userController = require("../controllers/users.js");
 
 
 router
     .route("/signup")
-    .get( userContorller.rendersignupForm)
-    .post(wrapAsync( userContorller.signup ));
+    .get(userController.rendersignupForm)
+    .post(wrapAsync(userController.signup));
 
 
 router
     .route("/login")
-    .get( userContorller.renderLoginForm)
-    .post( saveRedirectUrl,
+    .get(userController.renderLoginForm)
+    .post(saveRedirectUrl,
         passport.authenticate("local", {
             failureRedirect: "/login", 
             failureFlash: true,
         }), 
-        userContorller.login
+        userController.login
     );
 
 
-router.get("/logout", userContorller.logout);
+router.get("/logout", userController.logout);
+
+// Favorites routes
+router.get("/favorites", isLoggedIn, wrapAsync(userController.showFavorites));
+router.post("/favorites/:id", isLoggedIn, wrapAsync(userController.addToFavorites));
+router.delete("/favorites/:id", isLoggedIn, wrapAsync(userController.removeFromFavorites));
 
 
 module.exports = router;

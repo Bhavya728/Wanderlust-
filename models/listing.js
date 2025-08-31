@@ -38,10 +38,29 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user",
         },
-
- 
 });
 
+// Add a virtual property for average rating
+listingSchema.virtual('avgRating').get(function() {
+    if (this.review.length === 0) {
+        return 0;
+    }
+    
+    // If reviews are populated, calculate average
+    if (this.review.length > 0 && typeof this.review[0] === 'object' && this.review[0].rating) {
+        let sum = 0;
+        for (let review of this.review) {
+            sum += review.rating;
+        }
+        return (sum / this.review.length).toFixed(1);
+    }
+    
+    return 0;
+});
+
+// Ensure virtuals are included when converting to JSON
+listingSchema.set('toJSON', { virtuals: true });
+listingSchema.set('toObject', { virtuals: true });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
   if(listing) {

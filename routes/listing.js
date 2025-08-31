@@ -28,6 +28,8 @@ router
 //New Route
 router.get("/new", isLoggedIn, lisitngController.renderNewForm );
 
+//Search Route
+router.get("/search", wrapAsync(lisitngController.searchListings));
 
 router
     .route("/:id")

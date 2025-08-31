@@ -3,7 +3,12 @@
 
 <div class="row mt-3 mb-3 offset-2">
   <div class="col-8 offset-2">
-    <h3><%= listing.title %> </h3>
+    <div class="d-flex justify-content-between align-items-center">
+      <h3><%= listing.title %></h3>
+      <% if(listing.avgRating > 0) { %>
+        <span class="badge bg-success p-2"><i class="fa-solid fa-star"></i> <%= listing.avgRating %> (<%= listing.review.length %> reviews)</span>
+      <% } %>
+    </div>
   </div>
 
   <div class="card col-6 offset-2 show-card listing-card">
@@ -27,9 +32,21 @@
          &nbsp;&nbsp;&nbsp;&nbsp;
 
         <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button class="btn  btn-danger ">Delete </button>
+        <button class="btn btn-danger">Delete</button>
         </form>
       </div>
+      <% } else if(currUser) { %>
+        <div class="btn1">
+          <% if(currUser.favorites && currUser.favorites.includes(listing._id)) { %>
+            <form method="POST" action="/favorites/<%=listing._id%>?_method=DELETE">
+              <button class="btn btn-danger"><i class="fa-solid fa-heart"></i> Remove from Favorites</button>
+            </form>
+          <% } else { %>
+            <form method="POST" action="/favorites/<%=listing._id%>">
+              <button class="btn btn-success"><i class="fa-regular fa-heart"></i> Add to Favorites</button>
+            </form>
+          <% } %>
+        </div>
       <% } %>
       <hr> 
   </div>

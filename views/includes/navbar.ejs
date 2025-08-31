@@ -2,24 +2,111 @@
 
 <style>
   .search-btn {
-    background-color: #fe424d;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-    
+    padding: 0.5rem 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+  }
+
+  .search-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--border-color);
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    background-color: var(--input-bg);
+    color: var(--text-color);
   }
 
+  .search-inp:focus {
+    box-shadow: 0 0 0 3px rgba(110, 182, 230, 0.2);
+    border-color: var(--primary-color);
+  }
+
+  .navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #fe424d !important;
+    transform: translateY(-2px);
+  }
+  
+  /* Dark Mode Toggle Button */
+  #darkModeToggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #darkModeToggle:hover {
+    transform: rotate(15deg);
+  }
+  
+  .dark-icon, .light-icon {
+    font-size: 1.25rem;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .dark-mode .dark-icon {
+    display: none;
+  }
+  
+  .dark-mode .light-icon {
+    display: inline-block !important;
+    color: #f8f9fa;
+  }
+  
+  .dark-mode-toggle {
+    display: flex;
+    align-items: center;
+  }
+  
+  .brand-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+  }
+  
+  [data-theme="dark"] .brand-text {
+    color: var(--primary-color);
+  }
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
 
     <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+      <a class="navbar-brand" href="/listings">
+        <i class="fa-regular fa-compass me-2"></i>
+        <span class="brand-text">WanderLust</span>
+      </a>
 
       <button class="navbar-toggler" 
               type="button" 
@@ -30,25 +117,34 @@
 
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="/listings"><i>Explore</i></a>
-          <a class="nav-link" href="/listings/new"><i>WanderLust Listing</i></a>
+          <a class="nav-link" href="/listings"><i class="fa-solid fa-home me-1"></i> Home</a>
+          <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus me-1"></i> Create Listing</a>
         </div>
 
         <div class="navbar-nav ms-auto">
-          <form class="d-flex" role="search">
+          <form class="d-flex" role="search" action="/listings/search" method="GET">
             <input class="form-control me-3 search-inp" type="search" 
-                   placeholder="Search Destinations">
-            <button class=" search-btn" type="submit">Search</button>
+                   placeholder="Search Destinations" name="q">
+            <button class="search-btn" type="submit">Search</button>
           </form>
         </div> 
 
 
         <div class="navbar-nav ms-auto">
 
+          <!-- Dark Mode Toggle -->
+          <div class="nav-item dark-mode-toggle mx-2">
+            <button id="darkModeToggle" class="btn btn-sm" title="Toggle Dark Mode">
+              <i class="fa-solid fa-moon dark-icon"></i>
+              <i class="fa-solid fa-sun light-icon d-none"></i>
+            </button>
+          </div>
+
           <% if(!currUser) { %>  
           <a class="nav-link"  href="/signup"><b>Sign up</b></a>
           <a class="nav-link" href="/login"><b>Log in</b></a>
           <% } %> <% if(currUser) { %>
+          <a class="nav-link" href="/favorites"><i class="fa-solid fa-heart me-1"></i> Favorites</a>
           <a class="nav-link" href="/logout">Log out</a>
           <% } %>
         </div>

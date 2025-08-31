@@ -1,0 +1,127 @@
+/* Dark Mode Styles */
+:root {
+  --primary-color: #4a6fa5;
+  --primary-hover: #3a5a8c;
+  --accent-color: #6eb6e6;
+  --accent-hover: #5da7d7;
+  --text-color: #333;
+  --text-light: #666;
+  --bg-color: #f8f9fa;
+  --card-bg: #fff;
+  --input-bg: #fff;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --footer-bg: #f8f9fa;
+  --form-bg: #fff;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --primary-color: #6eb6e6;
+  --primary-hover: #5da7d7;
+  --accent-color: #4a6fa5;
+  --accent-hover: #3a5a8c;
+  --text-color: #e0e0e0;
+  --text-light: #b0b0b0;
+  --bg-color: #1a2639;
+  --card-bg: #2c3e50;
+  --input-bg: #34495e;
+  --border-color: #34495e;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --footer-bg: #2c3e50;
+  --form-bg: #2c3e50;
+}
+
+/* Apply dark mode to body */
+[data-theme="dark"] body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Navbar dark mode */
+[data-theme="dark"] .navbar {
+  background-color: #121212 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .fa-compass {
+  color: var(--primary-color);
+}
+
+/* Card dark mode */
+[data-theme="dark"] .card,
+[data-theme="dark"] .listing-card {
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+[data-theme="dark"] .card-title,
+[data-theme="dark"] .card-text {
+  color: var(--text-color);
+}
+
+/* Form elements dark mode */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .search-inp {
+  background-color: var(--input-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus,
+[data-theme="dark"] .search-inp:focus {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .form-label {
+  color: var(--text-color);
+}
+
+/* Buttons dark mode */
+[data-theme="dark"] .btn-outline-dark {
+  color: var(--text-color);
+  border-color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .btn-outline-dark:hover {
+  background-color: var(--text-color) !important;
+  color: var(--bg-color);
+}
+
+/* Footer dark mode */
+[data-theme="dark"] .f-info {
+  background-color: var(--footer-bg);
+  border-top: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .f-info-links a,
+[data-theme="dark"] .f-info-socials i,
+[data-theme="dark"] .f-info-brand {
+  color: var(--text-color);
+}
+
+/* Form container dark mode */
+[data-theme="dark"] #all, 
+[data-theme="dark"] #all2 {
+  background-color: var(--form-bg);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+/* Alert dark mode */
+[data-theme="dark"] .alert {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+/* Transition for all elements when switching modes */
+body * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

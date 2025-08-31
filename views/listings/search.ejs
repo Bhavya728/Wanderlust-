@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate")%>
+
+<div class="container">
+    <h1 class="mb-4">Search Results for "<%= searchQuery %>"</h1>
+    
+    <% if (resultsCount === 0) { %>
+        <div class="alert alert-info">
+            <p>No listings found matching your search criteria.</p>
+            <a href="/listings" class="btn btn-primary mt-3">Back to All Listings</a>
+        </div>
+    <% } else { %>
+        <p class="mb-4"><%= resultsCount %> <%= resultsCount === 1 ? 'listing' : 'listings' %> found</p>
+        
+        <div class="row">
+            <% searchResults.forEach(listing => { %>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card listing-card">
+                        <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= listing.title %></h5>
+                            <p class="card-text text-muted">
+                                <i class="fa-solid fa-location-dot"></i> 
+                                <%= listing.location %>, <%= listing.country %>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text">&#8377;<%= listing.price %>/night</p>
+                                <% if(listing.avgRating > 0) { %>
+                                  <span class="badge bg-success"><i class="fa-solid fa-star"></i> <%= listing.avgRating %></span>
+                                <% } %>
+                            </div>
+                            <a href="/listings/<%= listing._id %>" class="btn btn-sm btn-dark">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        
+        <div class="mt-4">
+            <a href="/listings" class="btn btn-outline-dark">Back to All Listings</a>
+        </div>
+    <% } %>
+</div>

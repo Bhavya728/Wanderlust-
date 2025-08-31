@@ -6,9 +6,9 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 // // to attach backend with cloudinary account we are config it with .env credintials
 cloudinary.config({ 
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET,
+    cloud_name: process.env.CLOUD_NAME || 'demo',
+    api_key: process.env.CLOUD_API_KEY || '123456789012345',
+    api_secret: process.env.CLOUD_API_SECRET || 'dummy_secret',
 });
 
 // // this is from npm cloudinary, only provide the folder name
